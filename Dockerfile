@@ -10,6 +10,10 @@ RUN pip install jupyter
 # Create a new user with UID 10014
 RUN useradd -m -u 10014 jupyteruser
 
+# Create necessary directories for Jupyter runtime and set permissions
+RUN mkdir -p /home/jupyteruser/.local/share/jupyter/runtime && \
+    chown -R jupyteruser:jupyteruser /home/jupyteruser/.local
+
 # Change ownership of the working directory to the new user
 RUN chown -R jupyteruser:jupyteruser /home/jupyter
 
